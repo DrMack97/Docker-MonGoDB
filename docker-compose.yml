@@ -3,52 +3,46 @@
 
 # /* 1.1 Servei MongoDB
 # El servei de MongoDB ha de complir els requisits següents:
-# ● Imatge: mongo:7.0
-# ● Nom del contenidor: mongodb-botiga
-# ● Port exposat: 27017 (host) → 27017 (contenidor)
-# ● Variables d'entorn: MONGO_INITDB_ROOT_USERNAME i MONGO_INITDB_ROOT_PASSWORD
-# ● Volum: muntar ./data a /data/db per a la persistència
-# ● Volum: muntar ./mongo-init a /docker-entrypoint-initdb.d per a la inicialització
-# ● Xarxa: xarxa personalitzada (amb nom) anomenada xarxa-botiga*/
+
 version: '3.8'
 
 services:
   mongodb:
-    image: mongo:7.0
-    container_name: mongodb-tienda
-    ports:
+    image: mongo:7.0 # ● Imatge: mongo:7.0
+    container_name: mongodb-tienda # ● Nom del contenidor: mongodb-botiga
+    ports: # ● Port exposat: 27017 (host) → 27017 (contenidor)
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: $david
-      MONGO_INITDB_ROOT_PASSWORD: $david97
+    environment: # ● Variables d'entorn:  i 
+      MONGO_INITDB_ROOT_USERNAME: david # MONGO_INITDB_ROOT_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: david97 # MONGO_INITDB_ROOT_PASSWORD
     volumes:
-      - ./fecha:/fecha/db
-      - ./mongo-init:/docker-entrypoint-initdb.d
+      - ./fecha:/fecha/db: muntar # ./data a /data/db per a la persistència
+      - ./mongo-init:/docker-entrypoint-initdb.d # ● Volum: muntar ./mongo-init a /docker-entrypoint-initdb.d per a la inicialització
     networks:
-      - red-tienda
+      - red-tienda # ● Xarxa: xarxa personalitzada (amb nom) anomenada xarxa-botiga*/
+    # 1.2 Servei Mongo Express
+    # Mongo Express és una interfície web per gestionar MongoDB. Ha de complir:
 
   mongoexpress:  # ← Dentro de services, no afuera
-    image: mongo-express:1.0
-    container_name: mongoexpress-tienda
-    ports:
+    image: mongo-express:1.0 # ● Imatge: mongo-express:1.0
+    container_name: mongoexpress-tienda # ● Nom del contenidor: mongoexpress-botiga
+    ports:        # ● Port exposat: 8081 (host) → 8081 (contenidor)
       - "8081:8081"
-    depends_on:
+    depends_on: # ● Dependència: ha d'arrancar després de mongodb-botiga
       - mongodb
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: $david
-      ME_CONFIG_MONGODB_ADMINPASSWORD: $david97
-      ME_CONFIG_MONGODB_URL: mongodb://$david:$david97@mongodb-tienda:27017/
+      ME_CONFIG_MONGODB_ADMINUSERNAME: david
+      ME_CONFIG_MONGODB_ADMINPASSWORD: david97
+      ME_CONFIG_MONGODB_URL: mongodb://david:david97@mongodb:27017/
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
     restart: unless-stopped
     networks:
-      - red-tienda
+      - red-tienda 
 
 networks:
   red-tienda:
     driver: bridge
 
-# 1.2 Servei Mongo Express
-# Mongo Express és una interfície web per gestionar MongoDB. Ha de complir:
-# ● Imatge: mongo-express:1.0
-# ● Nom del contenidor: mongoexpress-botiga
-# ● Port exposat: 8081 (host) → 8081 (contenidor)
-# ● Dependència: ha d'arrancar després de mongodb-botiga
+
+
+
