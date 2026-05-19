@@ -78,3 +78,12 @@ Esa decisión es coherente porque un pedido necesita conservar una foto fija de 
 
 MongoDB recomienda embedding cuando quieres consultar los datos juntos y references cuando quieres evitar duplicación o gestionar entidades con vida propia; por eso esta mezcla encaja bien con un sistema de tienda online.
 
+# Bloque 3 
+
+para ejecutar CRUD.js:
+
+docker compose down
+docker compose up -d
+
+docker exec -i mongodb-tienda mongosh -u david -p david97 --authenticationDatabase admin < ./queries/CRUD.js
+
