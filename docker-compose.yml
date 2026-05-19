@@ -16,7 +16,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: david # MONGO_INITDB_ROOT_USERNAME
       MONGO_INITDB_ROOT_PASSWORD: david97 # MONGO_INITDB_ROOT_PASSWORD
     volumes:
-      - ./fecha:/fecha/db: muntar # ./data a /data/db per a la persistència
+      - ./fecha:/data/db:muntar # ./data a /data/db per a la persistència
       - ./mongo-init:/docker-entrypoint-initdb.d # ● Volum: muntar ./mongo-init a /docker-entrypoint-initdb.d per a la inicialització
     networks:
       - red-tienda # ● Xarxa: xarxa personalitzada (amb nom) anomenada xarxa-botiga*/
@@ -35,6 +35,8 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: david97
       ME_CONFIG_MONGODB_URL: mongodb://david:david97@mongodb:27017/
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123
     restart: unless-stopped
     networks:
       - red-tienda 

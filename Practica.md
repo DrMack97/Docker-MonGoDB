@@ -9,7 +9,9 @@ Crea y ejecuta un único contenedor a partir de una imagen, indicando la configu
 Lee un archivo `docker-compose.yml` para crear, conectar y arrancar uno o varios contenedores que forman parte de una misma aplicación.
 
 ### Ámbito de uso
+
 - Usa `docker run` cuando quieras probar una imagen rápidamente, ejecutar un contenedor puntual o lanzar un servicio independiente.
+
 - Usa `docker compose up` cuando tu proyecto tenga varios servicios relacionados, por ejemplo una aplicación web y una base de datos.
 
 ## 2) Per a què serveix la instrucció `depends_on`? Garanteix que el servei dependent estigui completament operatiu?
@@ -47,8 +49,7 @@ En la práctica, eso significa que tras docker compose down y volver a levantar 
 Docker explica que los bind mounts y named volumes son precisamente los mecanismos para persistir datos fuera del ciclo de vida del contenedor.
 
 
-2. Explica la diferència entre un volum named (amb nom) i un bind mount (ruta del host).
-Quan convé usar cada un?
+2. Explica la diferència entre un volum named (amb nom) i un bind mount (ruta del host). Quan convé usar cada un?
 
 Un named volume lo gestiona Docker y no depende de una ruta concreta del host, así que es más portable y limpio para datos persistentes como bases de datos. 
 
