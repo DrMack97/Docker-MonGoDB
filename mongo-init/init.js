@@ -1,5 +1,16 @@
 // Base de datos
+db = db.getSiblingDB('admin');
+db.createUser({
+  user: "david",
+  pwd: "david97",
+  roles: [{ role: "root", db: "admin" }]
+});
+
+print("✅ Usuario 'david' creado correctamente");
+
 db = db.getSiblingDB('tienda');
+
+print("✅ Base de datos 'tienda' seleccionada");
 
 // Productos
 db.productos.insertMany([
