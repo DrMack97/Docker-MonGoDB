@@ -39,7 +39,31 @@ No. `depends_on` solo asegura que el contenedor se inicie antes que otro, pero n
 ### Conclusión
 En Docker Compose, una red personalizada suele ser la opción más recomendable porque facilita la comunicación entre servicios y mejora la estructura del entorno.
 
-# bloque 2
+# BLOQUE 2
+
+# Pantallazos:
+
+1. Engega l'entorn: docker compose up -d
+
+![alt text](compose.png)
+
+2. Accedeix a Mongo Express (http://localhost:8081) i verifica que existeix la BD botiga
+
+![alt text](tienda.png)
+
+3. Atura i elimina els contenidors: docker compose down
+
+![alt text](down.png)
+
+4. Torna a engegar: docker compose up -d
+
+![alt text](compose4.png)
+
+5. Verifica que les dades encara existeixen
+
+![alt text](datos.png)
+
+# Preguntes teòriques
 
 1. Què passaria si no definíssim cap volum al docker-compose.yml? Fes la prova i
 documenta el resultat.
@@ -62,23 +86,29 @@ Para una base de datos suele convenir named volume por robustez y portabilidad; 
 3. Explica la diferència entre l’estratègia embedding i l’estratègia referència amb exemples.
 Cal que els exemples siguin diferents dels que s’exposen en aquest document.
 
-Embedding significa guardar datos relacionados dentro del mismo documento; referencia significa guardar el dato principal en una colección y enlazar con otra colección mediante un identificador. 
+# EMBEDDING (Documentos Anidados)
 
-Un ejemplo cotidiano de embedding sería un pedido de supermercado con su lista de productos dentro del propio pedido, porque siempre quieres ver el pedido y sus líneas juntas. 
+Técnicamente, significa meter un documento de datos dentro de otro en un solo archivo JSON, utilizando objetos o listas (arrays). Los datos viven juntos en el mismo espacio de memoria.
 
-Un ejemplo cotidiano de referencia sería una biblioteca con una colección de libros y otra de autores, donde varios libros pueden apuntar al mismo autor sin duplicar sus datos. 
+frese:
+"Embedding es guardar los datos relacionados juntos en el mismo documento para poder leerlos todos de golpe con una velocidad brutal."
 
-MongoDB recomienda embedding cuando se leen juntos y references cuando los datos crecen mucho, se consultan por separado o se comparten entre documentos.
+# REFERENCIA (Normalización o Enlaces)
+
+Técnicamente, significa separar los datos en colecciones distintas y unirlos mediante un identificador único (como un _id o un email) que apunta de un documento a otro. Es el equivalente a las Claves Foráneas (Foreign Keys) del mundo SQL.
+
+frase:
+"Referencia es separar los datos en colecciones diferentes conectadas por un ID, evitando que la información se duplique y facilitando que se actualice en un solo lugar"
 
 
 4. Explica quina estratègia o estratègies has fet servir en la col·lecció comandes i per quin
 motiu.
 
-En pedidos has usado una estrategia mixta: referencia al cliente mediante cliente_email y embedding de los items dentro del pedido. 
+# pedidos referencia - embedding 
 
-Esa decisión es coherente porque un pedido necesita conservar una foto fija de las líneas compradas, cantidades y precios del momento, mientras que el cliente puede consultarse aparte y no hace falta duplicar todos sus datos en cada pedido. 
+En este modelo de negocio, la colección pedidos actúa como el puente de unión entre clientes y productos.
 
-MongoDB recomienda embedding cuando quieres consultar los datos juntos y references cuando quieres evitar duplicación o gestionar entidades con vida propia; por eso esta mezcla encaja bien con un sistema de tienda online.
+Técnicamente, no existe ninguna relación directa ni campos compartidos entre un cliente y un producto por sí solos: un producto no sabe qué clientes lo han comprado, y un cliente no tiene una lista de productos en su perfil. Esa conexión solo "nace" cuando se genera una transacción (un pedido).
 
 # Bloque 3 
 
@@ -90,10 +120,6 @@ docker compose up -d
 docker cp ./queries/CRUD.js mongodb-tienda:/tmp/CRUD.js
 
 docker exec -it mongodb-tienda mongosh -u david -p david97 --authenticationDatabase admin --eval 'load("/tmp/CRUD.js")'
-
-# entrar al contenedor sin autenticacion:
-
-docker exec -it mongodb-tienda mongosh
 
 # eliminar todos los volumenes no usados 
 
@@ -152,7 +178,7 @@ db.productos.find(
   { nombre: 1, precio: 1, _id: 0 }  // ← Proyección (2do argumento)
 )
 
-# bloque 4 advanced.js (falta ejemplos / seprarar por bloques / implemetar README.MD)
+# bloque 4 advanced.js 
 
 # ante algun cambio en crud:
 docker cp ./queries/CRUD.js mongodb-tienda:/tmp/CRUD.js

@@ -39,6 +39,16 @@ fecha/	                    Volumen named para persistencia de datos MongoDB
 
 ## Guia e ejecucion rapida 📊
 
+0. habilitar entorno:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+```bash
+docker --version
+```
+
 1. Clona el repositorio:
 ```bash
 git clone https://github.com/DrMack97/Docker-MonGoDB.git
@@ -69,12 +79,13 @@ docker compose down
 
 
 
-3. Comprueba que los contenedores están activos:
+## Comandos útiles
+
+Comprueba que los contenedores están activos:
 ```bash
 docker ps
 ```
 
-## Comandos útiles
 - Ver  logs:      logs = (bitacora)
 ```bash
 docker compose logs  -f
