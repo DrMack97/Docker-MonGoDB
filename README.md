@@ -49,6 +49,25 @@ cd Docker-MonGoDB
 ```bash
 docker compose up -d
 ```
+# Después de poner archivos CRUD.js y advanced.js en contenedor
+```bash
+docker cp ./queries/CRUD.js mongodb-tienda:/tmp/CRUD.js
+```
+```bash
+docker cp ./queries/advanced.js mongodb-tienda:/tmp/advanced.js
+```
+# Ejecutar el CRUD principal
+```bash
+docker exec -it mongodb-tienda mongosh -u david -p david97 --authenticationDatabase admin --eval 'load("/tmp/CRUD.js")'
+```
+
+# al terminar 
+- Detener el entorno:
+```bash
+docker compose down
+```
+
+
 
 3. Comprueba que los contenedores están activos:
 ```bash
@@ -64,26 +83,6 @@ docker compose logs  -f
 - Entrar en el contenedor de MongoDB:
 ```bash
 docker exec -it <mongodb-tienda> mongosh
-```
-
-- Detener el entorno:
-```bash
-docker compose down
-```
-
-# Después de modificar CRUD.js
-```bash
-docker cp ./queries/CRUD.js mongodb-tienda:/tmp/CRUD.js
-```
-
-# Después de modificar advanced.js
-```bash
-docker cp ./queries/advanced.js mongodb-tienda:/tmp/advanced.js
-```
-
-# Ejecutar el CRUD principal
-```bash
-docker exec -it mongodb-tienda mongosh -u david -p david97 --authenticationDatabase admin --eval 'load("/tmp/CRUD.js")'
 ```
 
 
