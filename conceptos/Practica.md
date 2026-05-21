@@ -1,3 +1,5 @@
+## Bloque 1 
+
 # Preguntes teòriques
 
 ## 1) Quina és la diferència entre `docker run` i `docker compose up`?
@@ -150,8 +152,7 @@ db.productos.find(
   { nombre: 1, precio: 1, _id: 0 }  // ← Proyección (2do argumento)
 )
 
-# bloque 4 advanced.js (falta ejemplos / seprarar por bloques /
-# implemetar README.MD)
+# bloque 4 advanced.js (falta ejemplos / seprarar por bloques / implemetar README.MD)
 
 # ante algun cambio en crud:
 docker cp ./queries/CRUD.js mongodb-tienda:/tmp/CRUD.js
@@ -163,6 +164,7 @@ docker cp ./queries/advanced.js mongodb-tienda:/tmp/advanced.js
 docker-compose up -d
 
 # Ejecutar CRUD
+
 docker exec -it mongodb-tienda mongosh -u david -p david97 --authenticationDatabase admin --eval 'load("/tmp/CRUD.js")'
 
 1. Quan pot ser perjudicial tenir massa índexs en una col·lecció? Explica el compromís
@@ -173,7 +175,7 @@ Tener demasiados índices es perjudicial cuando predominan las operaciones de es
 2. Llista totes les funcions i operadors que hagis utilitzat en les consultes, explica el seu
 significat i descriu un exemple d’ús diferent dels exemples d’aquest enunciat.
 
-🔹 Funciones CRUD básicas
+# 🔹 Funciones CRUD básicas
 
 find()	Busca documentos que cumplen una condición
 
@@ -195,7 +197,7 @@ countDocuments()	Cuenta documentos que cumplen condición
 
 aggregate()	Realiza consultas complejas con etapas
 
-🔹 Operadores de comparación
+# 🔹 Operadores de comparación
 
 $lt	Menor que
 
@@ -205,13 +207,13 @@ $gte	Mayor o igual que
 
 $lte	Menor o igual que
 
-🔹 Operadores lógicos
+# 🔹 Operadores lógicos
 
 $and	Cumple TODAS las condiciones
 
 $or	Cumple AL MENOS UNA condición
 
-🔹 Operadores de texto y arrays
+# 🔹 Operadores de texto y arrays
 
 $regex	Busca por patrón (expresión regular)
 
@@ -221,7 +223,7 @@ $inc	Incrementa valor numérico
 
 $set	Establece el valor de un campo
 
-🔹 Operadores de agregación ($group)
+# 🔹 Operadores de agregación ($group)
 
 $group	Agrupa documentos por un campo
 
@@ -233,7 +235,7 @@ $sort	Ordena resultados (1=ascendente, -1=descendente)
 
 $limit	Limita número de resultados
 
-🔹 Funciones de índices
+# 🔹 Funciones de índices
 
 createIndex()	Crea un índice para acelerar consultas
 
@@ -243,13 +245,13 @@ dropIndex()	Elimina un índice
 
 explain()	Muestra cómo MongoDB ejecuta una consulta
 
-🔹 Funciones de texto
+# 🔹 Funciones de texto
 
 $text	Busca por texto (requiere índice de texto)
 
 $search	Palabra a buscar en índice de texto
 
-🔹 Funciones auxiliares (mongosh)
+# 🔹 Funciones auxiliares (mongosh)
 
 print()	Muestra texto en consola
 

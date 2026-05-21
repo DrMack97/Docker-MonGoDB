@@ -1,22 +1,3 @@
-const rl = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-function leerInput(mensaje) {
-    return new Promise(resolve => {
-        rl.question(mensaje, resolve);
-    });
-}
-
-async function pausar() {
-    await new Promise(resolve => rl.question("\nPresiona Enter para continuar...", resolve));
-}
-
-// Seleccionar base de datos
-db = db.getSiblingDB('tienda');
-print("✅ Conectado a: " + db.getName());
-
 // ==============================================
 // 14. $and - Productos activos con precio entre 20€ y 100€
 // ==============================================
@@ -439,12 +420,6 @@ async function ejecutarConsultasAvanzadas() {
                 print("\n❌ Opción no válida. Elige 14-25 o 0");
         }
 
-        if (continuar && opcion !== "0") {
-            await pausar();
-        }
-    } 
-}
-ejecutarConsultasAvanzadas().then(() => {
-    rl.close();
-}).catch(console.error);
-
+        if (continuar && opcion !== "0") await pausar();
+    }
+} 

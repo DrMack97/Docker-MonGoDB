@@ -629,6 +629,7 @@ async function preguntarAvanzado() {
   if (respuesta.toLowerCase() === 's') {
     print("\n📂 Cargando consultas avanzadas...");
     load("/tmp/advanced.js");
+    await ejecutarConsultasAvanzadas();
   }
 }
 
